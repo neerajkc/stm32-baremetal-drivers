@@ -191,6 +191,25 @@ typedef struct
 
 
 /*
+ * peripheral register definition structure for SPI
+ */
+typedef struct
+{
+	__vo uint32_t CR1;        /*!< TODO,     										Address offset: 0x00 */
+	__vo uint32_t CR2;        /*!< TODO,     										Address offset: 0x04 */
+	__vo uint32_t SR;         /*!< TODO,     										Address offset: 0x08 */
+	__vo uint32_t DR;         /*!< TODO,     										Address offset: 0x0C */
+	__vo uint32_t CRCPR;      /*!< TODO,     										Address offset: 0x10 */
+	__vo uint32_t RXCRCR;     /*!< TODO,     										Address offset: 0x14 */
+	__vo uint32_t TXCRCR;     /*!< TODO,     										Address offset: 0x18 */
+	__vo uint32_t I2SCFGR;    /*!< TODO,     										Address offset: 0x1C */
+	__vo uint32_t I2SPR;      /*!< TODO,     										Address offset: 0x20 */
+} SPI_RegDef_t;
+
+
+
+
+/*
  * peripheral register definition structure for SYSCFG
  */
 typedef struct
@@ -230,7 +249,9 @@ typedef struct
 
 #define SYSCFG							((SYSCFG_RegDef_t *) SYSCFG_BASEADDR)
 
-
+#define SPI1  							((SPI_RegDef_t*)SPI1_BASEADDR)
+#define SPI2  							((SPI_RegDef_t*)SPI2_BASEADDR)
+#define SPI3  							((SPI_RegDef_t*)SPI3_BASEADDR)
 
 
 /*
@@ -256,7 +277,9 @@ typedef struct
  */
 
 #define SPI1_PCLK_EN()					( RCC->APB2ENR |= ( 1 << 12 ) )
-
+#define SPI2_PCLK_EN() 					( RCC->APB1ENR |= ( 1 << 14 ) )
+#define SPI3_PCLK_EN() 					( RCC->APB1ENR |= ( 1 << 15 ) )
+#define SPI4_PCLK_EN() 					( RCC->APB2ENR |= ( 1 << 13 ) )
 
 
 
@@ -325,107 +348,87 @@ typedef struct
  * TODO: You may complete this list for other peripherals
  */
 
-#define IRQ_NO_EXTI0		6
-#define IRQ_NO_EXTI1		7
-#define IRQ_NO_EXTI2		8
-#define IRQ_NO_EXTI3		9
-#define IRQ_NO_EXTI4		10
-#define IRQ_NO_EXTI9_5		23
-#define IRQ_NO_EXTI15_10	40
+#define IRQ_NO_EXTI0					6
+#define IRQ_NO_EXTI1					7
+#define IRQ_NO_EXTI2					8
+#define IRQ_NO_EXTI3					9
+#define IRQ_NO_EXTI4					10
+#define IRQ_NO_EXTI9_5					23
+#define IRQ_NO_EXTI15_10				40
 
 
 /*
  * macros for all the possible priority levels
  */
-#define NVIC_IRQ_PRI0     	0
-#define NVIC_IRQ_PRI15    	15
+#define NVIC_IRQ_PRI0     				0
+#define NVIC_IRQ_PRI15    				15
 
 
 //some generic macros
 
-#define ENABLE 				1
-#define DISABLE 			0
-#define SET					ENABLE
-#define RESET				DISABLE
-#define GPIO_PIN_SET		SET
-#define GPIO_PIN_RESET		RESET
+#define ENABLE 							1
+#define DISABLE 						0
+#define SET								ENABLE
+#define RESET							DISABLE
+#define GPIO_PIN_SET					SET
+#define GPIO_PIN_RESET					RESET
+#define FLAG_RESET         				RESET
+#define FLAG_SET 						SET
+
+
+
+/******************************************************************************************
+ *Bit position definitions of SPI peripheral
+ ******************************************************************************************/
+/*
+ * Bit position definitions SPI_CR1
+ */
+#define SPI_CR1_CPHA     				 0
+#define SPI_CR1_CPOL      				 1
+#define SPI_CR1_MSTR     				 2
+#define SPI_CR1_BR   					 3
+#define SPI_CR1_SPE     				 6
+#define SPI_CR1_LSBFIRST   			 	 7
+#define SPI_CR1_SSI     				 8
+#define SPI_CR1_SSM      				 9
+#define SPI_CR1_RXONLY      		 	10
+#define SPI_CR1_DFF     			 	11
+#define SPI_CR1_CRCNEXT   			 	12
+#define SPI_CR1_CRCEN   			 	13
+#define SPI_CR1_BIDIOE     			 	14
+#define SPI_CR1_BIDIMODE      			15
+
+
+/*
+ * Bit position definitions SPI_CR2
+ */
+#define SPI_CR2_RXDMAEN		 			0
+#define SPI_CR2_TXDMAEN				 	1
+#define SPI_CR2_SSOE				 	2
+#define SPI_CR2_FRF						4
+#define SPI_CR2_ERRIE					5
+#define SPI_CR2_RXNEIE				 	6
+#define SPI_CR2_TXEIE					7
+
+
+/*
+ * Bit position definitions SPI_SR
+ */
+#define SPI_SR_RXNE						0
+#define SPI_SR_TXE				 		1
+#define SPI_SR_CHSIDE				 	2
+#define SPI_SR_UDR					 	3
+#define SPI_SR_CRCERR				 	4
+#define SPI_SR_MODF					 	5
+#define SPI_SR_OVR					 	6
+#define SPI_SR_BSY					 	7
+#define SPI_SR_FRE					 	8
+
+
+
+
 
 #include "stm32f407xx_gpio_driver.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
