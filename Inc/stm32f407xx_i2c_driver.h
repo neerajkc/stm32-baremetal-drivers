@@ -135,6 +135,10 @@ void I2C_CloseReceiveData(I2C_Handle_t *pI2CHandle);
 void I2C_CloseSendData(I2C_Handle_t *pI2CHandle);
 
 
+void I2C_SlaveSendData(I2C_RegDef_t *pI2C,uint8_t data);
+uint8_t I2C_SlaveReceiveData(I2C_RegDef_t *pI2C);
+
+
 /*
  * IRQ Configuration and ISR handling
  */
@@ -150,6 +154,9 @@ void I2C_PeripheralControl(I2C_RegDef_t *pI2Cx, uint8_t EnOrDi);
 uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName);
 void I2C_ManageAcking(I2C_RegDef_t *pI2Cx, uint8_t EnorDi);
 void I2C_GenerateStopCondition(I2C_RegDef_t *pI2Cx);
+
+void I2C_SlaveEnableDisableCallbackEvents(I2C_RegDef_t *pI2Cx,uint8_t EnorDi);
+
 
 /*
  * Application callback
