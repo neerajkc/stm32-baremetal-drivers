@@ -380,6 +380,9 @@ typedef struct
 #define IRQ_NO_SPI2         			36
 #define IRQ_NO_SPI3         			51
 #define IRQ_NO_SPI4
+#define IRQ_NO_I2C1_EV     				31
+#define IRQ_NO_I2C1_ER     				32
+
 
 /*
  * macros for all the possible priority levels
